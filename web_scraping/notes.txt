@@ -1,0 +1,4 @@
+httpstatus
+
+503 server is unavailable
+404 resource not found
