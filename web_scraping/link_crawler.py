@@ -1,4 +1,5 @@
 import re
+import urlparse
 import helloWorld.py as get
 
 def link_crawler(seed_url, link_regex):
@@ -11,6 +12,8 @@ def link_crawler(seed_url, link_regex):
 		# filtrando links que se apliquem ao regex
 		for link in get_links(html):
 			if re.match(link_regex, link):
+				link = urlparse.urljoin(seed_url, url)
+				print 'url parse', link
 				craw_queue.append(link)
 
 def get_links(html):
