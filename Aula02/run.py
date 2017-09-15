@@ -10,7 +10,7 @@ from BluePrints.grupos import grupos
 #pegando as configuraçoes do flas
 app = Flask(__name__)
 
-app.register_blueprint(grupos)
+app.register_blueprint(user)
 
 @app.route("/usuarios/<int:id>")
 def get_usuario(id):
