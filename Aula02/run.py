@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask
 from BluePrints.usuarios import user
+from BluePrints.grupos import grupos
 
 
 
@@ -9,7 +10,7 @@ from BluePrints.usuarios import user
 #pegando as configuraçoes do flas
 app = Flask(__name__)
 
-app.register_blueprint(user)
+app.register_blueprint(grupos)
 
 @app.route("/usuarios/<int:id>")
 def get_usuario(id):
