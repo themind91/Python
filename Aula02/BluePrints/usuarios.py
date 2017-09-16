@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from flask import Blueprint,jsonify
+from flask import Blueprint,jsonify,request
 from model.Model import Usuarios
 import json
 
@@ -19,9 +19,13 @@ def create_user():
 	#recebendo os dados da request
 	usuario = request.get_json()
 	novo_usuario = Usuarios()
-	novo_usuario.save(usuario)
 
-	return jsonify({"message":"adicionando um usuario"})
+	for u in usuario.keys():
+		setattr(novo_usuario,u,usuario[u])
+
+	novo_usuario.save()
+
+	return jsonify({"message":"usuario adicionado com sucesso"})
 
 @user.route('/user/<int:id>')
 def user_by_id(id):
