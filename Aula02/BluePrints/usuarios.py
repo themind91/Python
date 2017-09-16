@@ -35,6 +35,9 @@ def user_by_id(id):
 
 @user.route('/user/<id>',methods=["DELETE"])
 def delete_user(id):
+	usuario = Usuarios.objects(id=id).first()
+	usuario.delete()
+
 	return jsonify({"message":"Excluindo um usuario"})
 
 
