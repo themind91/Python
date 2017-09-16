@@ -9,7 +9,7 @@ user = Blueprint('user',__name__)
 @user.route('/user/')
 def index_user():
 	#listando todos os usuarios
-	usuarios = Usuarios.objects.to_json()
+	usuarios = json.loads(Usuarios.objects.to_json())
 	print usuarios
 	return jsonify({"message":usuarios})
 
@@ -27,17 +27,27 @@ def create_user():
 
 	return jsonify({"message":"usuario adicionado com sucesso"})
 
-@user.route('/user/<int:id>')
+@user.route('/user/<id>/')
 def user_by_id(id):
-	usuarios = Usuarios.objects.to_json()
-	return jsonify({"message":"Index do gerenciamento de usuarios %s" %id})
+	user = json.loads(Usuarios.objects(id=id).to_json())
+	return jsonify({"message":user})
 
 
-@user.route('/user/<int:id>',methods=["DELETE"])
+@user.route('/user/<id>',methods=["DELETE"])
 def delete_user(id):
 	return jsonify({"message":"Excluindo um usuario"})
 
 
-@user.route('/user/<int:id>',methods=['PUT'])
+@user.route('/user/<id>',methods=['PUT'])
 def update_user(id):
+	usuario = request.get_json()
+	
+	novo_usuario = Usuarios.objects(id=id).first()
+	
+
+	for u in usuario.keys():
+		setattr(novo_usuario,u,usuario[u])
+
+	novo_usuario.save()
+
 	return jsonify({"message":"Alterando um usuario"})
