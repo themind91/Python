@@ -12,9 +12,7 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.Shell>
-      <command>COMANDO vai fazer falta</command>
-    </hudson.tasks.Shell>
+    
   </builders>
   <publishers/>
   <buildWrappers/>
