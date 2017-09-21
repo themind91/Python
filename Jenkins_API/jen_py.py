@@ -48,9 +48,14 @@ class JenkinsManager:
 			print " Falha ao criar JOB: %s "%e
 
 	
+	def start_job(self):
+		try:
 
+			self.server.build_job('Python_hudson')
+		except Exception as e:
+			print " erro ao startar o job %s" %e
 	
 
 if __name__ == '__main__':
 	j = JenkinsManager()
-	j.create_job()
+	j.start_job()
